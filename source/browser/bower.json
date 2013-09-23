@@ -1,9 +1,0 @@
-{
-  "name": "howto-bind-contenteditable-ngModel-example", "version": "0.0.1",
-  "dependencies": {
-    "angular": "1.2.0-rc.2",
-    "angular-resource": "1.2.0-rc.2",
-    "angular-route": "1.2.0-rc.2",
-    "bootstrap": "3.0.0"
-  }
-}
