@@ -1,0 +1,106 @@
+<!DOCTYPE html><html lang="en" ng-app="app"><head><link rel="stylesheet" href="/css/bootstrap.css"><style></style><style type="text/css">html {
+  position: relative;
+  height: 100%;
+  min-height: 100%;
+}
+body {
+  position: absolute;
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  min-height: 100%;
+  background: #eee;
+}
+.container {
+  width: 100%;
+  max-width: 100%;
+  padding: 0 30px;
+}
+.b-header--navbar {
+  padding: 15px 0;
+}
+.b-view {
+  position: relative;
+  height: 100%;
+  min-height: 100%;
+  padding: 80px 50px 50px;
+}
+.b-entry-editor {
+  margin: 0 -20px;
+  margin-bottom: 20px;
+  padding: 30px 20px;
+  background: #fff;
+}
+.b-entry-editor--entry {
+  padding: 0 15px;
+}
+.b-entry-editor--entry .b-entry--title,
+.b-entry-editor--entry .b-entry--content {
+  outline: 1px dashed #ddd;
+}
+.b-entry-model {
+  margin-top: 50px;
+  padding: 15px;
+}
+.b-entry--title {
+  margin: 15px 0;
+  margin-left: -0.05em;
+}
+.b-entry--content,
+.b-entry--content > div {
+  margin: 5px 0;
+}
+</style><script src="/js/libs/angular/angular.min.js"></script><script src="/js/libs/angular/angular-resource.min.js"></script><script src="/js/libs/angular/angular-route.min.js"></script><script></script><script type="text/javascript">
+(function() {
+  var app;
+
+  app = angular.module('contenteditable', []);
+
+  app.directive('contenteditable', function($parse, $compile) {
+    var directive;
+    return directive = {
+      restrict: 'A',
+      require: '?ngModel',
+      link: function($scope, $e, $a, ngModel) {
+        if (!ngModel) {
+          return;
+        }
+        $scope.$watch($a.ngModel, function(html) {
+          if (html !== $e.html()) {
+            return $e.html(ngModel.$viewValue);
+          }
+        });
+        return $e.bind('input', function(evt) {
+          var html;
+          html = $e.html();
+          return $scope.$apply(function() {
+            return ngModel.$setViewValue(html);
+          });
+        });
+      }
+    };
+  });
+
+  app = angular.module('app', ['contenteditable', 'ngResource', 'ngRoute'], function($routeProvider) {
+    return $routeProvider.when('/', {
+      controller: 'IndexRouteCtrl',
+      templateUrl: '/partials/'
+    });
+  });
+
+  app.factory('Entry', function($resource) {
+    return $resource('/api/entry/:entry', {
+      entry: '@id'
+    });
+  });
+
+  app.controller('IndexRouteCtrl', function($scope, Entry) {
+    console.log('index');
+    return $scope.entry = new Entry({
+      title: "Lorem Ipsum",
+      content: "<div><b>Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...</b></div>\n<div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus non porttitor dolor. Sed elementum sit amet elit in imperdiet. Cras euismod urna vulputate, porttitor nisl non, scelerisque augue. Duis vitae pretium leo. Praesent elementum accumsan faucibus. Nam vulputate arcu sit amet elit luctus, eget pretium diam rhoncus. Etiam sed tristique tellus, sit amet placerat ante. Quisque sed arcu posuere, accumsan augue ac, hendrerit velit. Quisque aliquam volutpat ipsum, non sollicitudin mi tempus quis. Aliquam nisl nulla, lobortis id est eget, aliquam posuere ligula. Morbi gravida in neque a malesuada.</div>\n<div>Duis et enim vitae mi tincidunt vestibulum tempor sed turpis. Suspendisse potenti. Maecenas lorem leo, pharetra sed elit a, euismod placerat risus. Aliquam rutrum in est et lobortis. Curabitur euismod magna eu blandit euismod. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nam porttitor ornare mollis. Ut ac massa eu diam egestas commodo. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Sed placerat dapibus dui quis porttitor. Nam felis libero, pharetra non neque in, sodales tempus nibh. Curabitur interdum erat quis risus molestie, id ornare orci tempor. Phasellus cursus elementum nulla at euismod. Sed vel eros purus.</div>"
+    });
+  });
+
+}).call(this);
+</script></head><body><header role="banner" class="b-header--navbar navbar navbar-fixed-top"><div class="container"><div class="b-header--navbar-header navbar-header"><a href="./" class="navbar-brand">angular-contenteditable</a></div><nav role="navigation" class="b-header--navbar-collapse navbar-collapse collapse"><ul class="nav navbar-nav"><li class="active"><a href="./">Demo</a></li><li><a href="https://github.com/tehfreak/howto-bind-contenteditable-ngModel-example">Github</a></li></ul></nav></div></header><main ng-view class="b-view container"></main></body><footer role="banner" class="b-footer--navbar navbar navbar-fixed-bottom"><div class="container"><div class="b-footer--navbar-header navbar-header"><a href="./" class="navbar-brand">angular-contenteditable</a></div></div></footer></html>
