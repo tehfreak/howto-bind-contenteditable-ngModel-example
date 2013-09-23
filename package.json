@@ -1,0 +1,51 @@
+{
+  "name": "howto-bind-contenteditable-ngModel-example", "version": "0.0.1",
+  "repository": "https://github.com/tehfreak/howto-bind-contenteditable-ngModel-example",
+
+  "config": {
+    "port": 1337
+  },
+
+  "scripts": {
+    "postinstall": "cd source/browser && bower install",
+    "prestart": "grunt",
+    "start": "coffee node.coffee"
+  },
+
+  "dependencies": {
+    "coffee-script": "latest",
+    "express": "latest"
+  },
+
+  "build": {
+    "app": {
+      "cwd"      : "app",
+      "browser": {
+        "cwd"    : "app/browser"
+      },
+      "server": {
+        "cwd"    : "app/server"
+      }
+    },
+    "src": {
+      "cwd"      : "source",
+      "browser": {
+        "cwd"    : "source/browser"
+      },
+      "server": {
+        "cwd"    : "source/server"
+      }
+    }
+  },
+
+  "devDependencies": {
+    "bower": "latest",
+    "grunt": "latest",
+    "grunt-contrib-clean": "latest",
+    "grunt-contrib-watch": "latest",
+    "grunt-contrib-copy": "latest",
+    "grunt-contrib-jade": "latest",
+    "grunt-contrib-less": "latest",
+    "less": "latest"
+  }
+}
