@@ -84,7 +84,7 @@ body {
   app = angular.module('app', ['contenteditable', 'ngResource', 'ngRoute'], function($routeProvider) {
     return $routeProvider.when('/', {
       controller: 'IndexRouteCtrl',
-      templateUrl: '/partials/'
+      templateUrl: './partials/'
     });
   });
 
@@ -95,7 +95,6 @@ body {
   });
 
   app.controller('IndexRouteCtrl', function($scope, Entry) {
-    console.log('index');
     return $scope.entry = new Entry({
       title: "Lorem Ipsum",
       content: "<div><b>Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...</b></div>\n<div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus non porttitor dolor. Sed elementum sit amet elit in imperdiet. Cras euismod urna vulputate, porttitor nisl non, scelerisque augue. Duis vitae pretium leo. Praesent elementum accumsan faucibus. Nam vulputate arcu sit amet elit luctus, eget pretium diam rhoncus. Etiam sed tristique tellus, sit amet placerat ante. Quisque sed arcu posuere, accumsan augue ac, hendrerit velit. Quisque aliquam volutpat ipsum, non sollicitudin mi tempus quis. Aliquam nisl nulla, lobortis id est eget, aliquam posuere ligula. Morbi gravida in neque a malesuada.</div>\n<div>Duis et enim vitae mi tincidunt vestibulum tempor sed turpis. Suspendisse potenti. Maecenas lorem leo, pharetra sed elit a, euismod placerat risus. Aliquam rutrum in est et lobortis. Curabitur euismod magna eu blandit euismod. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nam porttitor ornare mollis. Ut ac massa eu diam egestas commodo. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Sed placerat dapibus dui quis porttitor. Nam felis libero, pharetra non neque in, sodales tempus nibh. Curabitur interdum erat quis risus molestie, id ornare orci tempor. Phasellus cursus elementum nulla at euismod. Sed vel eros purus.</div>"
